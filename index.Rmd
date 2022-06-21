@@ -46,7 +46,7 @@ $$
 ```{r}
 mod <- lm(sales ~ region, data = sales_dat)
 
-region_cofs <- mod$coefficients[-1]
+region_coefs <- mod$coefficients[-1]
 max_idx <- which.max(region_coefs)
 ```
 
