@@ -15,7 +15,7 @@ jobs:
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown", "prettydoc"))'
       - name: Render index.Rmd
-        run: Rscript -e 'rmarkdown::render("index.Rmd", output_format = "html_document")'
+        run: Rscript -e 'rmarkdown::render("index.Rmd")'
       - name: Commit results
         run: |
           git add index.html
