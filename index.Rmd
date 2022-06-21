@@ -8,18 +8,17 @@ output:
     highlight: github
 ---
 
+```{r, child = "functions.Rmd", include = FALSE}
+```
+
+
 ## 数据概览
 
 
 `r Sys.Date()` 日各地区销售情况
 
 ```{r}
-day <- as.integer(format(Sys.Date(), "%d"))
-sales_dat <- data.frame(
-  region = rep(LETTERS, each = 10),
-  sales = rpois(26 * 10, day)
-)
-
+sales_dat <- fetch_sales_data()
 knitr::kable(head(sales_dat, 20))
 ```
 ## 描述性分析
@@ -27,9 +26,7 @@ knitr::kable(head(sales_dat, 20))
 本日销售量最多对前 10 个地区为：
 
 ```{r}
-sales_sum <- aggregate(sales ~ region, data = sales_dat, sum)
-
-top_10_regions <- head(sales_sum[order(-sales_sum$sales), ], 10)
+top_10_regions <- top_n_regions(sales_dat, 10)
 
 barplot(sales ~ region, data = top_10_regions)
 ```
